@@ -1,0 +1,41 @@
+server:
+  port: 9000
+#management:
+#  security:
+#    enabled: false #关掉安全认证
+#  port: 8080 #管理端口调整成8088
+#  context-path: /monitor #actuator的访问路径
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: h2
+    data: classpath:data.sql
+    schema: classpath:schema.sql
+  application:
+    # 指定注册到 Eureka Service 中的应用名
+    name: microservice-provider-user
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:123456@localhost:8761/eureka/
+    instance:
+      # 将自己的ip注册到Eureka Server，如不配置获取设置为false.则表示注册微服务
+      #所在操作系统的hostname到Eureka Server
+      prefer-ip-address: true
+
+logging:
+  level:
+    ROOT: info
+    org.hibernate: info
+info:
+    app:
+      name: @project.artifactId@
+      encoding: @project.build.sourceEncoding@
+      java:
+        source: ${java.runtime.version}
+        target: @java.version@
+

@@ -1,0 +1,33 @@
+server:
+  port: 8001
+#management:
+#  security:
+#    enabled: false #关掉安全认证
+#  port: 8081 #管理端口调整成8088
+#  context-path: /monitor #actuator的访问路径
+
+#用户服务地址
+user:
+  service:
+    url: http://localhost:8000/
+
+spring:
+  application:
+    name: simpe-consumer-movie
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+#      如果Eureka Server需要认证。 defaultZone需改为
+      #http://userName:passworf@EUREKA_HOST:EUREKA_PROT/eureka/
+      defaultZone: http://eureka:123456@localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    prefer-ip-address: true
+
+#自定义ribbon配置 服务名.ribbon.配置内容
+microservice-provider-user:
+  ribbon:
+    #负载均衡规则
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
