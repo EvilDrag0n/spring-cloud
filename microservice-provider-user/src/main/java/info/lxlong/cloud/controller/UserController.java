@@ -28,6 +28,7 @@ public class UserController {
     @GetMapping("/save")
     public User save(User user) {
         user = this.userRepository.save(user);
+
         return user;
     }
 }
